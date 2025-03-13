@@ -1,7 +1,7 @@
 mod command;
 mod matches;
 mod generate;
-mod util;
+mod utilities;
 
 fn main() {
     let matches = command::axum_command().get_matches();
