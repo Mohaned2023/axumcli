@@ -10,6 +10,6 @@ fn main() {
     match matches.subcommand() {
         Some(("generate", sub_command)) => matches::generate_matches(sub_command),
         Some(("new", command)) => new::new_axum_project(command.get_one::<String>("PATH").unwrap()),
-        _ => println!("Run with --help for usage info."),
+        _ => println!("Run with --help for usage information."),
     }
 }
