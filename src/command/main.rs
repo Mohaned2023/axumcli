@@ -1,3 +1,5 @@
+use clap::arg;
+
 use super::{Command, generate};
 
 pub fn main_commands() -> Vec<Command> {
@@ -6,5 +8,9 @@ pub fn main_commands() -> Vec<Command> {
                     .alias("g")
                     .about("generate about")
                     .subcommands(generate::generate_commands()),
+        Command::new("new")
+                .alias("n")
+                .about("Create/Initialize new axum project.")
+                .arg(arg!(<PATH> "The project path."))
     ]
 }

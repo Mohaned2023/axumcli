@@ -17,3 +17,22 @@ pub fn new( g_type: &str, name: String) {
         eprintln!("Error: Can NOT create the file, No such file or directory '{}'!", g_path);
     }
 }
+
+pub fn init() {
+    let models: [&str; 9] = [
+        "route", "service", "state", "middleware",
+        "handler", "error", "entity", "dto", "config"
+    ];
+    for model in models {
+        let src_path = super::utilities::get_project_path();
+        println!("-> Creating {0} at '{1}/{0}s/mod.rs'", model, src_path);
+        super::utilities::create_file_with_parent(
+            &format!("{}/src/{}s/mod.rs", src_path, model)
+        );
+        println!("    -> Adding {}s model to '{}/main.rs'", model, src_path);
+        super::utilities::prepend_file(
+            format!("mod {}s;\n", model).as_bytes(),
+            format!("{}/src/main.rs", src_path)
+        );
+    }
+}

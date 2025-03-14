@@ -51,3 +51,28 @@ pub fn get_name_from_args(command: &clap::ArgMatches) -> String {
         .expect("Error: Can NOT get the file name from the args!")
         .replace(" ", "_")
 }
+
+pub fn run_cargo_commands(args: Vec<&str>) {
+    let  output: std::process::Output = std::process::Command::new("cargo")
+    .args(args)
+    .output()
+    .expect("Error: Can NOT run 'cargo'!");
+
+    std::io::stdout().write_all(&output.stdout).unwrap();
+    std::io::stderr().write_all(&output.stderr).unwrap();
+
+    // check the command status..
+    if !output.status.success() {
+        eprintln!("Error: Cargo command return an error with code {}!", output.status.code().unwrap());
+        std::process::exit(1);
+    }
+}
+
+pub fn create_file_with_parent(path: &str) {
+    if let Some( parent_dir ) = std::path::Path::new(path).parent() {
+        std::fs::create_dir_all(parent_dir)
+            .expect("Error: Can NOT create the directories!");
+    }
+    std::fs::File::create(path)
+        .expect("Error: Can NOT create the file!");
+}
