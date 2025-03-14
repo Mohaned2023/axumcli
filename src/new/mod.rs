@@ -1,6 +1,6 @@
 pub fn new_axum_project(path: &String) {
-    // cargo new <path>
-    crate::utilities::run_cargo_commands(vec!["new", path]);
+    // cargo init <path>
+    crate::utilities::run_cargo_commands(vec!["init", path]);
 
     println!("-> Changing the path to '{}'", path);
     std::env::set_current_dir(path)
