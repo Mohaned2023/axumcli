@@ -1,6 +1,6 @@
 mod generate;
 mod main;
-use clap::{Command, arg};
+use clap::{Command, arg, Arg};
 
 pub fn axum_command() -> Command {
     Command::new("axumcli")

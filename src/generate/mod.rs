@@ -1,4 +1,4 @@
-pub fn new( g_type: &str, name: String) {
+pub fn new( g_type: &str, name: &str) {
         let g_path: String = format!("{}/src/{}s", super::utilities::get_project_path(), g_type);
     if super::utilities::check_folder(&g_path) {
         let full_path = format!("{}/{}_{}.rs", g_path, name, g_type);
@@ -19,8 +19,8 @@ pub fn new( g_type: &str, name: String) {
 }
 
 pub fn init() {
-    let models: [&str; 9] = [
-        "route", "service", "state", "middleware",
+    let models: [&str; 10] = [
+        "model", "route", "service", "state", "middleware",
         "handler", "error", "entity", "dto", "config"
     ];
     for model in models {
@@ -34,5 +34,12 @@ pub fn init() {
             format!("mod {}s;\n", model).as_bytes(),
             format!("{}/src/main.rs", src_path)
         );
+    }
+}
+
+pub fn new_model( (models, name): (Vec<String>, String) ) {
+    new("model", &name);
+    for model in models {
+        new(&model, &name);
     }
 }

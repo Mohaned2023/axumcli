@@ -1,7 +1,24 @@
-use super::{Command, arg};
+use super::{Command, arg, Arg};
 
 pub fn generate_commands() -> Vec<Command> {
     vec! [
+        Command::new("model")
+                    .alias("m")
+                    .about("Create new model file in models dir and update models/mod.rs.")
+                    .args([
+                        arg!(   <NAME>       "The model name."),
+                        Arg::new("all").short('a').long("all").action(clap::ArgAction::SetTrue)
+                                .help("Create all templates like: route, service, middleware, state ..."),
+                        Arg::new("route").short('r').long("route").action(clap::ArgAction::SetTrue),
+                        Arg::new("service").short('s').long("service").action(clap::ArgAction::SetTrue),
+                        Arg::new("state").long("state").action(clap::ArgAction::SetTrue),
+                        Arg::new("middleware").short('m').long("middleware").action(clap::ArgAction::SetTrue),
+                        Arg::new("handler").short('n').long("handler").action(clap::ArgAction::SetTrue),
+                        Arg::new("error").long("error").action(clap::ArgAction::SetTrue),
+                        Arg::new("entity").short('e').long("entity").action(clap::ArgAction::SetTrue),
+                        Arg::new("dto").long("dto").action(clap::ArgAction::SetTrue),
+                        Arg::new("config").long("config").action(clap::ArgAction::SetTrue),
+                    ]),
         Command::new("route")
                     .alias("r")
                     .about("Create new route file in routes dir and update routes/mod.rs.")
@@ -15,7 +32,7 @@ pub fn generate_commands() -> Vec<Command> {
                     .about("Create new state file in states dir and update states/mod.rs.")
                     .arg(arg!(<NAME> "The State Name.")),
         Command::new("middleware")
-                    .alias("m")
+                    .alias("mw")
                     .about("Create new middleware file in middlewares dir and update middlewares/mod.rs.")
                     .arg(arg!(<NAME> "The Middleware Name.")),
         Command::new("handler")

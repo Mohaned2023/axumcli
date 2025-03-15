@@ -76,3 +76,26 @@ pub fn create_file_with_parent(path: &str) {
     std::fs::File::create(path)
         .expect("Error: Can NOT create the file!");
 }
+
+pub fn get_args_from_command(command: &clap::ArgMatches) -> (Vec<String>, String) {
+    let name = get_name_from_args(command);
+    let models: [&str; 9] = [
+        "route", "service", "state", "middleware",
+        "handler", "error", "entity", "dto", "config"
+    ];
+    if command.get_one::<bool>("all").copied().unwrap_or(false) {
+        return (
+            models
+                .map(|x: &str| x.to_owned())
+                .to_vec(), 
+            name
+        );
+    }
+    let mut slected_models: Vec<String> = Vec::new();
+    for model in models {
+        if command.get_one(&model).copied().unwrap_or(false){
+            slected_models.push(model.to_owned());
+        }
+    }
+    (slected_models, name.clone())
+}
