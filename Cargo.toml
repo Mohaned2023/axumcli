@@ -7,7 +7,7 @@ license = "MIT"
 license-file = "LICENSE"
 readme = "README.md"
 repository = "https://github.com/Mohaned2023/axumcli" 
-documentation = "https://github.com/Mohaned2023/axumcli/DOCs.md" 
+documentation = "https://github.com/Mohaned2023/axumcli/blob/master/DOCs.md" 
 homepage = "https://github.com/Mohaned2023/axumcli"
 keywords = ["axum", "cli", "axumcli", "generator"]
 
