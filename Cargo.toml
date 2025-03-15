@@ -2,5 +2,17 @@
 name = "axumcli"
 version = "0.1.0"
 edition = "2021"
+description = "The Axum CLI is a command-line tool that helps you to create/initialize and develop your Axum appliction."
+license = "MIT"
+license-file = "LICENSE"
+readme = "README.md"
+repository = "https://github.com/Mohaned2023/axumcli" 
+documentation = "https://github.com/Mohaned2023/axumcli/DOCs.md" 
+homepage = "https://github.com/Mohaned2023/axumcli"
+keywords = ["axum", "cli", "axumcli", "generator"]
+
+[[bin]]
+name = "axumcli"
 
 [dependencies]
+clap = { version = "4.5.32", features = ["derive"] }
